@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Bloomly | Сучасна флористика з душею + AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #c44569;
+            --primary-dark: #a13452;
+            --primary-light: #e29eb3;
+            --dark: #0c1115;
+            --light: #fcf7ff;
+            --gray: #f2edf5;
+            --text-dark: #2d2f36;
+            --text-light: #000000;
+            --white: #ffffff;
+            --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 25px 40px -15px rgba(196, 69, 105, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--text-dark);
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 16px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(196, 69, 105, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            margin-top: 88px;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #fef0fe 0%, #ffe9e6 100%);
+            padding: 60px 0;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .catalog {
+            padding: 80px 0;
+            background: var(--gray);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .product-btn {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .product-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .about {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .ai-vision {
+            padding: 80px 0;
+            background: linear-gradient(125deg, #f8f0f0 0%, #fef7f2 100%);
+            border-top: 1px solid rgba(196, 69, 105, 0.15);
+            border-bottom: 1px solid rgba(196, 69, 105, 0.15);
+        }
+
+        .vision-card {
+            background: var(--white);
+            border-radius: 36px;
+            padding: 48px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease;
+        }
+
+        .vision-card:hover {
+            transform: scale(1.01);
+        }
+
+        .vision-content {
+            flex: 1.5;
+            min-width: 240px;
+        }
+
+        .vision-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .vision-content p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .vision-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--gray);
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 500;
+        }
+
+        .vision-badge i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .vision-link-area {
+            flex: 1;
+            text-align: center;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8e2 100%);
+            border-radius: 32px;
+            padding: 32px 24px;
+            transition: var(--transition);
+        }
+
+        .vision-link-area:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(196, 69, 105, 0.15);
+        }
+
+        .vision-link-area i {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .vision-link-area h4 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .vision-external-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .vision-external-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            gap: 16px;
+        }
+
+        .reviews {
+            padding: 80px 0;
+            background: var(--gray);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .delivery {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .delivery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .delivery-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2c3e4e 0%, #1a2a36 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(196, 69, 105, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .contact-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary-light);
+            margin-bottom: 24px;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .contact-desc {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .contact-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .benefit-item i {
+            font-size: 1.3rem;
+            color: var(--primary-light);
+        }
+
+        .contact-cta {
+            background: white;
+            border-radius: 80px;
+            padding: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            margin-bottom: 32px;
+        }
+
+        .contact-cta:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-cta span {
+            padding-left: 28px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-link-btn {
+            background: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .form-link-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .contact-social {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .contact-social a {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .contact-social a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-phone {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            display: inline-block;
+            width: 100%;
+        }
+
+        .contact-phone a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-col p, .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 968px) {
+            .hero .container { flex-direction: column; text-align: center; }
+            .about-grid, .vision-card { flex-direction: column; }
+            .nav-links { display: none; }
+            .contact h2 { font-size: 1.8rem; }
+            .contact-cta { flex-direction: column; background: transparent; box-shadow: none; }
+            .contact-cta span { padding-left: 0; color: white; }
+        }
+
+        @media (max-width: 568px) {
+            .hero-content h1 { font-size: 2rem; }
+            .section-header h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a href="#" class="logo">Bloom<span>ly</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Головна</a></li>
+            <li><a href="#catalog">Каталог</a></li>
+            <li><a href="#about">Про нас</a></li>
+            <li><a href="#aiVision">AI Роза</a></li>
+            <li><a href="#reviews">Відгуки</a></li>
+            <li><a href="#contact">Контакти</a></li>
+        </ul>
+        <div class="header-buttons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-shopping-bag"></i>
+        </div>
+    </div>
+</header>
+
+<section id="home" class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Квіти, що <span>розповідають</span><br>історію вашого серця</h1>
+            <p>Натуральна краса, бездоганний смак та індивідуальний підхід до кожного букета. Даруйте емоції разом з Bloomly.</p>
+            <div class="hero-buttons">
+                <a href="#catalog" class="btn-primary">Обрати букет</a>
+                <a href="#about" class="btn-outline">Дізнатись більше</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://i.pinimg.com/736x/6b/d0/21/6bd02146040ca03f906365de279eba5f.jpg" alt="Букет троянд">
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card"><i class="fas fa-truck"></i><h3>Безкоштовна доставка</h3><p>При замовленні від 1000 грн</p></div>
+            <div class="feature-card"><i class="fas fa-clock"></i><h3>Доставка за 2 години</h3><p>По Києву та передмістю</p></div>
+            <div class="feature-card"><i class="fas fa-leaf"></i><h3>Свіжість 100%</h3><p>Квіти прямо з голландських теплиць</p></div>
+            <div class="feature-card"><i class="fas fa-gift"></i><h3>Подарункова упаковка</h3><p>Безкоштовно при замовленні від 1500 грн</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- КАТАЛОГ З 12 БУКЕТАМИ (ВСІ ФОТО ПРАЦЮЮТЬ) -->
+<section id="catalog" class="catalog">
+    <div class="container">
+        <div class="section-header">
+            <h2>Найкращі букети</h2>
+            <p>Оберіть ідеальний подарунок для найрідніших</p>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image"><img src="https://i.pinimg.com/1200x/c5/0b/fb/c50bfb3c0b79a8390ceb7b15a04650f1.jpg" alt="Флорист"></div>
+            <div class="about-text">
+                <h2>Флористика з душею</h2>
+                <p>Bloomly — це не просто квітковий магазин. Ми створюємо історії за допомогою квітів, допомагаємо висловити найглибші почуття та даруємо радість.</p>
+                <p>Наші флористи — справжні художники, які вкладають душу в кожну композицію. Ми працюємо тільки з найсвіжішими квітами, щоб ваш букет тішив якомога довше.</p>
+                <a href="#contact" class="btn-primary" style="display: inline-block; margin-top: 20px;">Зв'язатись з нами</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="aiVision" class="ai-vision">
+    <div class="container">
+        <div class="vision-card">
+            <div class="vision-content">
+                <h3><i class="fas fa-microchip"></i> AI-розпізнавання троянд</h3>
+                <p>Наша нейромережа миттєво визначає тип троянди за фото. Дізнайтеся яка саме троянда перед вами: вишукана кущова, класична чайна чи розкішна піоноподібна. Отримайте базові поради щодо догляду саме за вашим типом рослини.</p>
+                <div class="vision-badge"><i class="fas fa-robot"></i><span>Машинний зір · Розпізнавання за 3 секунди</span></div>
+            </div>
+            <div class="vision-link-area">
+                <i class="fas fa-camera-retro"></i>
+                <h4>Спробуйте AI-візію</h4>
+                <p>Завантажте фото троянди та дізнайтеся її тип за допомогою штучного інтелекту</p>
+                <a href="https://teachablemachine.withgoogle.com/models/neor3Ybw0/" target="_blank" class="vision-external-link" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt"></i> Перейти до AI-розпізнавання
+                </a>
+                <p style="margin-top: 16px; font-size: 0.75rem; color: #999;"><i class="fas fa-shield-alt"></i> Безкоштовно · без реєстрації</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="reviews">
+    <div class="container">
+        <div class="section-header"><h2>Наші відгуки</h2><p>Понад 5000 щасливих отримувачів квітів</p></div>
+        <div class="reviews-grid">
+            <div class="review-card"><div class="stars">★★★★★</div><p>"Неймовірно красивий букет! Замовляла на річницю — чоловік був у захваті."</p><div class="review-author">— Олена К.</div></div>
+            <div class="review-card"><div class="stars">★★★★★</div><p>"Найкращий квітковий магазин у Києві. Квіти свіжі, упаковка елегантна."</p><div class="review-author">— Андрій М.</div></div>
+            <div class="review-card"><div class="stars">★★★★★</div><p>"Замовляю тут вже не перший раз. Завжди якісні квіти та приємне обслуговування."</p><div class="review-author">— Ірина С.</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="delivery">
+    <div class="container">
+        <div class="delivery-grid">
+            <div class="delivery-item"><i class="fas fa-map-marker-alt"></i><h3>По Києву</h3><p>Безкоштовно від 1000 грн<br>Доставка за 2 години</p></div>
+            <div class="delivery-item"><i class="fas fa-city"></i><h3>Передмістя</h3><p>Доставка протягом дня<br>Вартість від 150 грн</p></div>
+            <div class="delivery-item"><i class="fas fa-calendar-alt"></i><h3>Доставка до дати</h3><p>Замовте заздалегідь<br>Ми привеземо в потрібний час</p></div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="contact-badge"><i class="fas fa-heart"></i> Зв'яжіться з нами</div>
+            <h2>Готові створити <br>квіткову історію?</h2>
+            <p class="contact-desc">Залиште заявку — наш флорист підбере ідеальний букет, враховуючи всі ваші побажання</p>
+            <div class="contact-benefits">
+                <div class="benefit-item"><i class="fas fa-clock"></i><span>Відповідь за 15 хв</span></div>
+                <div class="benefit-item"><i class="fas fa-palette"></i><span>Індивідуальний дизайн</span></div>
+                <div class="benefit-item"><i class="fas fa-gem"></i><span>Подарунок до замовлення</span></div>
+            </div>
+            <div class="contact-cta">
+                <span>📋 Заповніть форму — отримайте консультацію</span>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqGTfiK1qallAvLZUD5RBqv4LRNayG54boAmf2q_BtiMYTMA/viewform?usp=sharing" target="_blank" class="form-link-btn">Перейти до форми <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="contact-social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-viber"></i></a>
+            </div>
+            <div class="contact-phone"><p>Або зателефонуйте нам</p><a href="tel:+380671234567">+38 (067) 123-45-67</a></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col"><h4>Bloomly</h4><p>Сучасна флористика з душею. Даруємо радість через квіти щодня.</p></div>
+            <div class="footer-col"><h4>Інформація</h4><a href="#">Про нас</a><a href="#">Доставка та оплата</a><a href="#">Повернення</a></div>
+            <div class="footer-col"><h4>Каталог</h4><a href="#">Букети</a><a href="#">Коробки</a><a href="#">Весільні</a></div>
+            <div class="footer-col"><h4>Контакти</h4><p>📞 +38 (067) 123-45-67</p><p>✉️ hello@bloomly.ua</p><p>📍 Київ, Хрещатик, 15</p></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 Bloomly. Всі права захищені.</p></div>
+    </div>
+</footer>
+
+<script>
+    // 12 букетів з перевіреними робочими URL зображень
+    const products = [
+        { name: "Троянда Freedom", price: 1250, image: "https://i.pinimg.com/1200x/ad/d0/b5/add0b57527711b89409746840fb21632.jpg" },
+        { name: "Троянда Mondial та Deep Water", price: 1100, image: "https://i.pinimg.com/736x/c2/3e/dd/c23eddd50760c8c31336f9d53faeb3c4.jpg" },
+        { name: "Троянда Aqua з гіпсофілою", price: 1450, image: "https://i.pinimg.com/736x/98/99/30/9899300c314267e17fc48efe5ef684f1.jpg" },
+        { name: "Троянда Moody Blues", price: 1850, image: "https://i.pinimg.com/736x/4b/e7/ca/4be7ca134f876939eda5735596b2b05d.jpg" },
+        { name: "Піоноподібна троянда Red Piano", price: 2200, image: "https://i.pinimg.com/1200x/7d/4d/f1/7d4df11269cf73f8d871db9cf8682c55.jpg" },
+        { name: "Троянда White Chocolate", price: 2900, image: "https://i.pinimg.com/736x/a7/86/73/a78673bfbde9938905416fb8c2cbcdcc.jpg" },
+        { name: "Троянда Quicksand", price: 1650, image: "https://i.pinimg.com/1200x/25/76/d5/2576d51c830f1b3acc4f5892da9c42f3.jpg" },
+        { name: "Троянда Pink Floyd", price: 1900, image: "https://i.pinimg.com/736x/ed/3f/3f/ed3f3f28d34c82306c1fab7ab25eefad.jpg" },
+        { name: "Піоноподібна троянда Catalina", price: 2100, image: "https://i.pinimg.com/1200x/2e/a6/2b/2ea62bac1fb0ac41215317447ba6e0ef.jpg" },
+        { name: "Троянда Confetti", price: 1150, image: "https://i.pinimg.com/736x/c1/cd/d8/c1cdd814bc9156927f3223b4b5bdc433.jpg" },
+        { name: "Троянда Deep Purple", price: 1300, image: "https://i.pinimg.com/736x/b4/1f/d8/b41fd8a618678df1ce93e0d5ca272ace.jpg" },
+        { name: "Троянда Red Naomi та Mondial", price: 1550, image: "https://i.pinimg.com/736x/fa/66/c9/fa66c90b439d3df47b44b97258a469d3.jpg" }
+    ];
+
+    function renderProducts() {
+        const grid = document.getElementById("productsGrid");
+        if (grid) {
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x280?text=Bloomly'">
+                    <div class="product-info">
+                        <h3>${p.name}</h3>
+                        <div class="product-price">${p.price} грн</div>
+                        <button class="product-btn" onclick="alert('Товар «${p.name}» додано до кошика!')">Замовити</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+    }
+
+    // Плавний скрол
+    document.querySelectorAll('.nav-links a, .hero-buttons a, .about-text .btn-primary').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const offset = 80;
+                    const elementPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    renderProducts();
+</script>
+</body>
+</html>
